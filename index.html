@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serene Retirement Village - Your Peaceful Haven</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-home"></i>
+                    <span>Serene Retirement Village</span>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#health" class="nav-link">Health Monitor</a></li>
+                        <li><a href="#cctv" class="nav-link">CCTV</a></li>
+                        <li><a href="#packages" class="nav-link">Packages</a></li>
+                        <li><a href="#programmes" class="nav-link">Programmes</a></li>
+                        <li><a href="#payment" class="nav-link">Payment</a></li>
+                    </ul>
+                </nav>
+                <button class="emergency-btn" id="emergencyBtn">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    EMERGENCY
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Welcome to Serene Retirement Village</h1>
+                    <p>Experience comfort, care, and community in our state-of-the-art retirement facility</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="scrollToSection('packages')">View Packages</button>
+                        <button class="btn btn-secondary" onclick="scrollToSection('health')">Health Services</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Health Monitoring Section -->
+        <section id="health" class="section health-section">
+            <div class="container">
+                <h2>Health Monitoring Dashboard</h2>
+                <div class="health-grid">
+                    <div class="health-card">
+                        <div class="health-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Heart Rate</h3>
+                        <div class="health-value" id="heartRate">72</div>
+                        <div class="health-unit">bpm</div>
+                        <div class="health-status normal">Normal</div>
+                    </div>
+                    <div class="health-card">
+                        <div class="health-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <h3>Blood Pressure</h3>
+                        <div class="health-value" id="bloodPressure">120/80</div>
+                        <div class="health-unit">mmHg</div>
+                        <div class="health-status normal">Normal</div>
+                    </div>
+                    <div class="health-card">
+                        <div class="health-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <h3>Body Temperature</h3>
+                        <div class="health-value" id="temperature">36.5</div>
+                        <div class="health-unit">°C</div>
+                        <div class="health-status normal">Normal</div>
+                    </div>
+                    <div class="health-card">
+                        <div class="health-icon">
+                            <i class="fas fa-lungs"></i>
+                        </div>
+                        <h3>Oxygen Level</h3>
+                        <div class="health-value" id="oxygen">98</div>
+                        <div class="health-unit">%</div>
+                        <div class="health-status normal">Normal</div>
+                    </div>
+                </div>
+                <div class="health-history">
+                    <h3>Recent Health Readings</h3>
+                    <div class="chart-container">
+                        <canvas id="healthChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CCTV Monitoring Section -->
+        <section id="cctv" class="section cctv-section">
+            <div class="container">
+                <h2>CCTV Security Monitoring</h2>
+                <div class="cctv-grid">
+                    <div class="cctv-camera">
+                        <div class="camera-feed">
+                            <img src="https://picsum.photos/seed/camera1/400/300.jpg" alt="Main Entrance">
+                            <div class="camera-overlay">
+                                <span class="camera-name">Main Entrance</span>
+                                <span class="camera-status live">LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cctv-camera">
+                        <div class="camera-feed">
+                            <img src="https://picsum.photos/seed/camera2/400/300.jpg" alt="Garden Area">
+                            <div class="camera-overlay">
+                                <span class="camera-name">Garden Area</span>
+                                <span class="camera-status live">LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cctv-camera">
+                        <div class="camera-feed">
+                            <img src="https://picsum.photos/seed/camera3/400/300.jpg" alt="Dining Hall">
+                            <div class="camera-overlay">
+                                <span class="camera-name">Dining Hall</span>
+                                <span class="camera-status live">LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cctv-camera">
+                        <div class="camera-feed">
+                            <img src="https://picsum.photos/seed/camera4/400/300.jpg" alt="Corridor">
+                            <div class="camera-overlay">
+                                <span class="camera-name">Main Corridor</span>
+                                <span class="camera-status live">LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="section packages-section">
+            <div class="container">
+                <h2>Retirement Packages</h2>
+                <div class="packages-grid">
+                    <div class="package-card basic">
+                        <div class="package-header">
+                            <h3>Basic Care</h3>
+                            <div class="package-price">RM 2,500<span>/month</span></div>
+                        </div>
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Comfortable accommodation</li>
+                            <li><i class="fas fa-check"></i> 3 meals daily</li>
+                            <li><i class="fas fa-check"></i> Basic health monitoring</li>
+                            <li><i class="fas fa-check"></i> Housekeeping service</li>
+                            <li><i class="fas fa-check"></i> 24/7 security</li>
+                        </ul>
+                        <button class="btn btn-package" onclick="selectPackage('Basic Care', 2500)">Select Package</button>
+                    </div>
+                    <div class="package-card premium featured">
+                        <div class="package-badge">Most Popular</div>
+                        <div class="package-header">
+                            <h3>Premium Care</h3>
+                            <div class="package-price">RM 4,500<span>/month</span></div>
+                        </div>
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Spacious premium room</li>
+                            <li><i class="fas fa-check"></i> Gourmet dining experience</li>
+                            <li><i class="fas fa-check"></i> Advanced health monitoring</li>
+                            <li><i class="fas fa-check"></i> Personal care assistant</li>
+                            <li><i class="fas fa-check"></i> Physiotherapy sessions</li>
+                            <li><i class="fas fa-check"></i> Entertainment activities</li>
+                        </ul>
+                        <button class="btn btn-package" onclick="selectPackage('Premium Care', 4500)">Select Package</button>
+                    </div>
+                    <div class="package-card luxury">
+                        <div class="package-header">
+                            <h3>Luxury Care</h3>
+                            <div class="package-price">RM 7,000<span>/month</span></div>
+                        </div>
+                        <ul class="package-features">
+                            <li><i class="fas fa-check"></i> Luxury suite with balcony</li>
+                            <li><i class="fas fa-check"></i> Personal chef service</li>
+                            <li><i class="fas fa-check"></i> 24/7 medical supervision</li>
+                            <li><i class="fas fa-check"></i> Private nurse</li>
+                            <li><i class="fas fa-check"></i> Custom wellness program</li>
+                            <li><i class="fas fa-check"></i> Family guest accommodation</li>
+                            <li><i class="fas fa-check"></i> Premium transportation</li>
+                        </ul>
+                        <button class="btn btn-package" onclick="selectPackage('Luxury Care', 7000)">Select Package</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programmes Section -->
+        <section id="programmes" class="section programmes-section">
+            <div class="container">
+                <h2>Ongoing Programmes & Activities</h2>
+                <div class="programmes-grid">
+                    <div class="programme-card">
+                        <div class="programme-image">
+                            <img src="https://picsum.photos/seed/yoga/300/200.jpg" alt="Yoga Class">
+                        </div>
+                        <div class="programme-content">
+                            <h3>Morning Yoga</h3>
+                            <p class="programme-schedule">Every Monday, Wednesday, Friday - 8:00 AM</p>
+                            <p>Gentle yoga exercises designed for seniors to improve flexibility and balance.</p>
+                            <button class="btn btn-small" onclick="joinProgramme('Morning Yoga')">Join Programme</button>
+                        </div>
+                    </div>
+                    <div class="programme-card">
+                        <div class="programme-image">
+                            <img src="https://picsum.photos/seed/art/300/200.jpg" alt="Art Therapy">
+                        </div>
+                        <div class="programme-content">
+                            <h3>Art Therapy Workshop</h3>
+                            <p class="programme-schedule">Every Tuesday - 2:00 PM</p>
+                            <p>Express creativity through painting and crafts in a supportive environment.</p>
+                            <button class="btn btn-small" onclick="joinProgramme('Art Therapy Workshop')">Join Programme</button>
+                        </div>
+                    </div>
+                    <div class="programme-card">
+                        <div class="programme-image">
+                            <img src="https://picsum.photos/seed/music/300/200.jpg" alt="Music Therapy">
+                        </div>
+                        <div class="programme-content">
+                            <h3>Music & Memory</h3>
+                            <p class="programme-schedule">Every Thursday - 3:00 PM</p>
+                            <p>Enjoy nostalgic music sessions that stimulate memory and promote social interaction.</p>
+                            <button class="btn btn-small" onclick="joinProgramme('Music & Memory')">Join Programme</button>
+                        </div>
+                    </div>
+                    <div class="programme-card">
+                        <div class="programme-image">
+                            <img src="https://picsum.photos/seed/garden/300/200.jpg" alt="Gardening">
+                        </div>
+                        <div class="programme-content">
+                            <h3>Therapeutic Gardening</h3>
+                            <p class="programme-schedule">Every Saturday - 9:00 AM</p>
+                            <p>Engage in light gardening activities that promote physical activity and mental well-being.</p>
+                            <button class="btn btn-small" onclick="joinProgramme('Therapeutic Gardening')">Join Programme</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Section -->
+        <section id="payment" class="section payment-section">
+            <div class="container">
+                <h2>Payment Center</h2>
+                <div class="payment-container">
+                    <div class="payment-form">
+                        <h3>Make a Payment</h3>
+                        <form id="paymentForm">
+                            <div class="form-group">
+                                <label for="residentName">Resident Name</label>
+                                <input type="text" id="residentName" name="residentName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentType">Payment Type</label>
+                                <select id="paymentType" name="paymentType" required>
+                                    <option value="">Select Payment Type</option>
+                                    <option value="monthly">Monthly Fee</option>
+                                    <option value="deposit">Security Deposit</option>
+                                    <option value="additional">Additional Services</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount (RM)</label>
+                                <input type="number" id="amount" name="amount" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentMethod">Payment Method</label>
+                                <div class="payment-methods">
+                                    <label class="payment-method">
+                                        <input type="radio" name="paymentMethod" value="credit" required>
+                                        <i class="fas fa-credit-card"></i>
+                                        Credit/Debit Card
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="paymentMethod" value="online" required>
+                                        <i class="fas fa-university"></i>
+                                        Online Banking
+                                    </label>
+                                    <label class="payment-method">
+                                        <input type="radio" name="paymentMethod" value="ewallet" required>
+                                        <i class="fas fa-wallet"></i>
+                                        E-Wallet
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-full">Proceed to Payment</button>
+                        </form>
+                    </div>
+                    <div class="payment-info">
+                        <h3>Payment Information</h3>
+                        <div class="info-card">
+                            <h4>Bank Account Details</h4>
+                            <p><strong>Bank:</strong> Maybank Berhad</p>
+                            <p><strong>Account Name:</strong> Serene Retirement Village Sdn Bhd</p>
+                            <p><strong>Account Number:</strong> 1234567890123</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Payment Methods Accepted</h4>
+                            <ul>
+                                <li>Credit/Debit Cards (Visa, Mastercard)</li>
+                                <li>Online Banking (All major banks)</li>
+                                <li>E-Wallets (Touch 'n Go, GrabPay, Boost)</li>
+                                <li>Cheque</li>
+                                <li>Cash (at reception)</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>Office Hours</h4>
+                            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                            <p>Saturday: 9:00 AM - 1:00 PM</p>
+                            <p>Sunday: Closed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-phone"></i> +603-1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> info@sereneretirement.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123, Jalan Serene, 50250 Kuala Lumpur</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#facilities">Facilities</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Serene Retirement Village. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="modal">
+        <div class="modal-content emergency-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-triangle"></i> EMERGENCY ALERT</h2>
+            </div>
+            <div class="modal-body">
+                <p>Emergency assistance has been requested!</p>
+                <p>Our medical team and staff have been notified and will respond immediately.</p>
+                <div class="emergency-timer">
+                    <div class="timer-circle">
+                        <span id="countdown">30</span>
+                    </div>
+                    <p>Canceling in <span id="timerText">30</span> seconds...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="confirmEmergency">Confirm Emergency</button>
+                <button class="btn btn-secondary" id="cancelEmergency">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-check-circle"></i> Success</h2>
+            </div>
+            <div class="modal-body">
+                <p id="successMessage">Operation completed successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal('successModal')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
