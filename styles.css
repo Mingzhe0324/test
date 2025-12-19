@@ -160,6 +160,56 @@ body {
     transform: scale(1.05);
 }
 
+/* Floating Emergency Button */
+.floating-emergency-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+}
+
+.emergency-btn.floating {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: none;
+    padding: 1.4rem 2.2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: floatPulse 2s infinite, glow 2s ease-in-out infinite;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 10px 30px rgba(231, 76, 60, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.emergency-btn.floating:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 12px 35px rgba(231, 76, 60, 0.6);
+}
+
+.emergency-btn.floating:active {
+    transform: scale(1.05);
+}
+
+@keyframes floatPulse {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        box-shadow: 0 10px 30px rgba(231, 76, 60, 0.5);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(231, 76, 60, 0.7);
+    }
+}
+
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); }
     70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
@@ -745,6 +795,147 @@ body {
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0.5; }
+}
+
+/* Guardian Access Styles */
+.guardian-access {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-top: 3rem;
+    box-shadow: 0 15px 40px rgba(52, 152, 219, 0.15);
+    border: 2px solid rgba(52, 152, 219, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.guardian-access::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(52, 152, 219, 0.05) 0%, transparent 70%);
+    animation: float 6s ease-in-out infinite;
+}
+
+.guardian-access h3 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.guardian-access h3::before {
+    content: '\f084';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #3498db;
+    font-size: 1.8rem;
+    animation: pulse 2s infinite;
+}
+
+.guardian-access p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.guardian-form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2.5rem;
+    border-radius: 15px;
+    border: 2px solid rgba(52, 152, 219, 0.3);
+    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.guardian-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.guardian-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.guardian-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.guardian-form input,
+.guardian-form select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #ecf0f1;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.guardian-form input:focus,
+.guardian-form select:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-2px);
+}
+
+.guardian-form button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 auto;
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.guardian-form button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.guardian-form button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.guardian-form button:hover {
+    background: linear-gradient(135deg, #2980b9, #21618c);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
 }
 
 /* Packages Section */
@@ -1561,6 +1752,361 @@ body {
     max-height: 60vh;
 }
 
+/* Emergency Modal Body Styles */
+.emergency-modal-body {
+    padding: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.emergency-content-wrapper {
+    padding: 2rem;
+}
+
+/* Emergency Alert Section */
+.emergency-alert-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.emergency-icon-large {
+    font-size: 4rem;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    animation: emergencyPulse 1.5s ease-in-out infinite;
+}
+
+.emergency-alert-section h3 {
+    color: #e74c3c;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.emergency-main-message {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Emergency Information Section */
+.emergency-info-section {
+    margin-bottom: 2rem;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #3498db;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.info-item i {
+    font-size: 1.5rem;
+    color: #3498db;
+    min-width: 30px;
+}
+
+.info-item h4 {
+    margin: 0 0 0.3rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.info-item p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Emergency Timer Section */
+.emergency-timer-section {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #fdf2f2, #fff5f5);
+    border-radius: 15px;
+    border: 2px solid #fecaca;
+}
+
+.timer-text {
+    font-size: 1.2rem;
+    color: #e74c3c;
+    font-weight: bold;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.timer-subtext {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* Emergency Actions Section */
+.emergency-actions-section {
+    margin-bottom: 2rem;
+}
+
+.emergency-actions-section h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-align: left;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.action-btn i {
+    font-size: 1.2rem;
+    min-width: 20px;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Emergency Instructions */
+.emergency-instructions {
+    background: #e8f4fd;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #3498db;
+}
+
+.emergency-instructions h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.emergency-instructions h4 i {
+    color: #3498db;
+}
+
+.emergency-instructions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.emergency-instructions li {
+    padding: 0.5rem 0;
+    color: #2c3e50;
+    position: relative;
+    padding-left: 1.5rem;
+    line-height: 1.5;
+}
+
+.emergency-instructions li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #27ae60;
+    font-weight: bold;
+}
+
+/* Enhanced Emergency Modal */
+.emergency-modal {
+    border: 3px solid #e74c3c;
+    max-width: 600px;
+    width: 95%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    margin-top: 8vh; /* Move modal further down for better button visibility */
+}
+
+.emergency-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow: hidden;
+}
+
+.emergency-modal .modal-header {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border-bottom: none;
+    padding: 1rem;
+    flex-shrink: 0;
+    min-height: 60px;
+}
+
+.emergency-modal .modal-body {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(85vh - 140px);
+    padding: 1.5rem;
+}
+
+.emergency-modal .modal-footer {
+    padding: 1rem;
+    border-top: 2px solid #f8f9fa;
+    background: #f8f9fa;
+    flex-shrink: 0;
+    min-height: 80px;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Responsive Design for Emergency Modal */
+@media (max-width: 768px) {
+    .emergency-modal {
+        width: 98%;
+        margin: 5vh auto 2% auto; /* Position modal further down on mobile */
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .emergency-modal .modal-content {
+        max-height: 90vh;
+    }
+    
+    .emergency-modal .modal-body {
+        flex: 1;
+        max-height: calc(90vh - 140px);
+        overflow-y: auto;
+        padding: 1rem;
+    }
+    
+    .emergency-modal .modal-footer {
+        flex-shrink: 0;
+        padding: 0.8rem;
+        background: #f8f9fa;
+        border-top: 2px solid #ecf0f1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 100px;
+    }
+    
+    .emergency-modal .modal-footer button {
+        width: 100%;
+        padding: 0.8rem;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-cancel-emergency {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        color: white;
+        border: 2px solid #c0392b;
+        order: 2;
+    }
+    
+    .btn-danger {
+        background: linear-gradient(135deg, #27ae60, #229954);
+        color: white;
+        border: 2px solid #229954;
+        order: 1;
+    }
+    
+    .emergency-content-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .emergency-icon-large {
+        font-size: 3rem;
+    }
+    
+    .emergency-alert-section h3 {
+        font-size: 1.5rem;
+    }
+    
+    .emergency-main-message {
+        font-size: 1.1rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .info-item {
+        padding: 0.8rem;
+    }
+    
+    .action-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .emergency-instructions {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .emergency-content-wrapper {
+        padding: 1rem;
+    }
+    
+    .emergency-alert-section {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+    
+    .emergency-timer-section {
+        padding: 1rem;
+    }
+    
+    .timer-text {
+        font-size: 1.1rem;
+    }
+    
+    .emergency-actions-section h4 {
+        font-size: 1.2rem;
+    }
+}
+
 .emergency-modal {
     border: 3px solid #e74c3c;
 }
@@ -1610,12 +2156,129 @@ body {
     animation: pulse 1s infinite;
 }
 
+/* Prominent Cancel Button */
+.btn-cancel-emergency {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: 3px solid #c0392b;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    animation: emergencyPulse 2s infinite;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.btn-cancel-emergency:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6);
+    border-color: #a93226;
+}
+
+.btn-cancel-emergency i {
+    font-size: 1.3rem;
+}
+
+@keyframes emergencyPulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(231, 76, 60, 0.8);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    }
+}
+
+/* Copy Address Section */
+.copy-address-section {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.copy-address-btn {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: 2px solid #2980b9;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .btn-cancel-emergency {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .copy-address-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
 .modal-footer {
-    padding: 1.5rem;
+    padding: 1rem;
     border-top: 1px solid #ecf0f1;
     display: flex;
     gap: 1rem;
-    justify-content: flex-end;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* Ensure emergency modal buttons are always visible */
+.emergency-modal .modal-footer button {
+    min-width: 120px;
+    min-height: 44px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.emergency-modal .modal-footer .btn-danger {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: white;
+    border: 2px solid #229954;
+}
+
+.emergency-modal .modal-footer .btn-danger:hover {
+    background: linear-gradient(135deg, #229954, #1e8449);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+}
+
+.emergency-modal .modal-footer .btn-cancel-emergency {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+    border: 2px solid #c0392b;
+}
+
+.emergency-modal .modal-footer .btn-cancel-emergency:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
 }
 
 @keyframes fadeIn {
@@ -2339,6 +3002,28 @@ button:focus {
     }
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.mobile-menu-toggle.active {
+    background: rgba(255,255,255,0.2);
+}
+
 /* Enhanced Responsive Navigation */
 @media (max-width: 1024px) {
     .nav-wrapper {
@@ -2361,31 +3046,70 @@ button:focus {
 }
 
 @media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+        order: 2;
+    }
+    
     .nav-wrapper {
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
-        align-items: stretch;
+        align-items: center;
+        justify-content: space-between;
     }
     
     .nav {
-        order: 2;
+        order: 3;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: linear-gradient(135deg, #2c3e50, #3498db);
+        box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+        transition: right 0.3s ease;
+        z-index: 1000;
+        padding: 5rem 1rem 2rem;
+        overflow-y: auto;
+    }
+    
+    .nav.active {
+        right: 0;
     }
     
     .nav ul {
         flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        max-height: 200px;
-        overflow-y: auto;
-        justify-content: center;
+        text-align: left;
+        gap: 0;
+        width: 100%;
+    }
+    
+    .nav li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .nav li:last-child {
+        border-bottom: none;
     }
     
     .nav-link {
         font-size: 1rem;
-        padding: 0.6rem 1rem;
+        padding: 1rem;
         width: 100%;
-        justify-content: center;
+        justify-content: flex-start;
+        border-radius: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-link:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateX(5px);
+    }
+    
+    .dropdown {
+        width: 100%;
     }
     
     .dropdown-menu {
@@ -2394,35 +3118,120 @@ button:focus {
         visibility: visible;
         transform: none;
         box-shadow: none;
-        background: rgba(255,255,255,0.1);
-        margin-top: 0.5rem;
-        border-radius: 10px;
+        background: rgba(0,0,0,0.2);
+        margin-top: 0;
+        border-radius: 0;
+        display: none;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        display: block;
     }
     
     .dropdown-menu a {
         color: white;
-        padding: 0.5rem 1rem;
+        padding: 0.8rem 1rem 0.8rem 2rem;
+        font-size: 0.9rem;
     }
     
     .dropdown-menu a:hover {
-        background: rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.1);
         color: white;
+        transform: translateX(5px);
+    }
+    
+    .dropdown-toggle {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .dropdown-toggle i {
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown.active .dropdown-toggle i {
+        transform: rotate(180deg);
     }
     
     .emergency-btn {
         order: 1;
         align-self: center;
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
     }
     
     .logo {
         order: 0;
         align-self: center;
     }
+    
+    /* Overlay for mobile menu */
+    .mobile-menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .mobile-menu-overlay.active {
+        display: block;
+        opacity: 1;
+    }
 }
 
 @media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 2.5rem 0;
+    }
+    
+    .section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 250px;
+    }
+    
+    .btn-small {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
     .logo {
         font-size: 1.1rem;
     }
@@ -2431,27 +3240,784 @@ button:focus {
         font-size: 1.4rem;
     }
     
-    .nav ul {
-        max-height: 180px;
+    /* Health Cards Mobile */
+    .health-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
     }
     
-    .nav-link {
-        font-size: 0.9rem;
-        padding: 0.5rem 0.8rem;
+    .health-card {
+        padding: 1.2rem;
+        text-align: center;
     }
     
-    .emergency-btn {
-        padding: 0.7rem 1.2rem;
+    .health-icon {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .health-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .health-value {
+        font-size: 1.8rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .health-unit {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .health-status {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+    
+    /* Health Reports Mobile */
+    .health-reports {
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .health-score-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .score-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 1.8rem;
+    }
+    
+    .report-tabs {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .tab-btn {
+        flex: 1;
+        min-width: 80px;
+        padding: 0.6rem 0.8rem;
         font-size: 0.9rem;
+    }
+    
+    .report-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    /* Packages Mobile */
+    .packages-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .package-card {
+        padding: 1.5rem;
+    }
+    
+    .package-card.featured {
+        transform: none;
+        border: 2px solid #3498db;
+    }
+    
+    .package-header h3 {
+        font-size: 1.5rem;
+    }
+    
+    .package-price {
+        font-size: 2.2rem;
+    }
+    
+    .package-features li {
+        padding: 0.6rem 0;
+        font-size: 1rem;
+    }
+    
+    /* Programmes Mobile */
+    .programmes-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .programme-card {
+        margin-bottom: 0;
+    }
+    
+    .programme-content {
+        padding: 1.2rem;
+    }
+    
+    .programme-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .programme-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .programme-actions .btn {
+        width: 100%;
+        max-width: none;
+    }
+    
+    /* CCTV Mobile */
+    .cctv-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .camera-feed img {
+        height: 200px;
+    }
+    
+    /* Guardian Access Mobile */
+    .guardian-access {
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .guardian-access h3 {
+        font-size: 1.5rem;
+    }
+    
+    .guardian-form {
+        padding: 1.5rem;
+    }
+    
+    .guardian-form .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .guardian-form label {
+        font-size: 1rem;
+    }
+    
+    .guardian-form input,
+    .guardian-form select {
+        padding: 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .guardian-form button {
+        width: 100%;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Contact Mobile */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .contact-info {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .contact-card {
+        padding: 1.5rem;
+    }
+    
+    .contact-form {
+        padding: 1.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-group label {
+        font-size: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.8rem;
+        font-size: 1rem;
     }
     
     .map-directions {
         flex-direction: column;
         align-items: center;
+        gap: 1rem;
     }
     
     .map-directions .btn {
         width: 100%;
         max-width: 250px;
+    }
+    
+    /* Footer Mobile */
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    /* Floating Emergency Button Mobile */
+    .floating-emergency-container {
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .emergency-btn.floating {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 45px;
+        box-shadow: 0 8px 25px rgba(231, 76, 60, 0.5);
+        min-height: 50px;
+        min-width: 50px;
+    }
+    
+    .emergency-btn.floating i {
+        font-size: 0.9rem;
+    }
+    
+    /* Modal Mobile */
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        max-height: 96vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .modal-body {
+        padding: 1.5rem;
+        max-height: 70vh;
+        overflow-y: auto;
+        flex: 1;
+    }
+    
+    .emergency-content-wrapper {
+        padding: 1.5rem;
+    }
+    
+    .emergency-icon-large {
+        font-size: 3rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .action-btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    /* Emergency Modal Footer Mobile */
+    .emergency-modal .modal-footer {
+        padding: 1rem;
+        background: #f8f9fa;
+        border-top: 2px solid #ecf0f1;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .emergency-modal .modal-footer button {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-cancel-emergency {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        color: white;
+        border: 2px solid #c0392b;
+        order: 2; /* Cancel button appears last */
+    }
+    
+    .btn-danger {
+        background: linear-gradient(135deg, #27ae60, #229954);
+        color: white;
+        border: 2px solid #229954;
+        order: 1; /* Confirm button appears first */
+    }
+    
+    /* Map Mobile */
+    .map-section {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section {
+        padding: 3rem 0;
+    }
+    
+    .section h2 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .health-card {
+        padding: 1.5rem;
+    }
+    
+    .health-value {
+        font-size: 2rem;
+    }
+    
+    .package-card {
+        padding: 1.5rem;
+    }
+    
+    .package-price {
+        font-size: 2.2rem;
+    }
+    
+    .programme-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .cctv-camera {
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-card {
+        padding: 1.5rem;
+    }
+    
+    .footer {
+        padding: 2rem 0 1rem;
+    }
+    
+    /* Ultra-small floating button */
+    .floating-emergency-container {
+        bottom: 15px;
+        left: 15px;
+    }
+    
+    .emergency-btn.floating {
+        padding: 0.9rem 1.3rem;
+        font-size: 0.95rem;
+        border-radius: 42px;
+        min-height: 48px;
+        min-width: 48px;
+    }
+    
+    .emergency-btn.floating i {
+        font-size: 0.9rem;
+    }
+}
+
+/* Tablet Optimization */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+    
+    .programmes-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+    
+    .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    /* Guardian Room Monitoring Modal Styles */
+    .guardian-room-modal {
+        max-width: 1200px;
+        width: 95%;
+        max-height: 95vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .guardian-room-modal .modal-content {
+        display: flex;
+        flex-direction: column;
+        max-height: 95vh;
+        overflow: hidden;
+    }
+    
+    .guardian-room-modal .modal-header {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+        border-bottom: none;
+        padding: 1.5rem;
+        flex-shrink: 0;
+    }
+    
+    .guardian-room-modal .modal-body {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0;
+        background: #f8f9fa;
+    }
+    
+    .guardian-room-modal .modal-footer {
+        padding: 1.5rem;
+        border-top: 2px solid #ecf0f1;
+        background: white;
+        flex-shrink: 0;
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .room-monitoring-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .room-info-panel {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+    
+    .room-details h3 {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .status-indicators {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .status-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+    
+    .status-item.online {
+        color: #27ae60;
+    }
+    
+    .status-item.recording {
+        color: #e74c3c;
+    }
+    
+    .status-item.audio {
+        color: #3498db;
+    }
+    
+    .status-item i {
+        font-size: 0.8rem;
+    }
+    
+    .guardian-info p {
+        margin: 0.5rem 0;
+        color: #7f8c8d;
+    }
+    
+    .guardian-info strong {
+        color: #2c3e50;
+    }
+    
+    .camera-feed-container {
+        background: white;
+        border-radius: 15px;
+        padding: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .live-camera {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #000;
+    }
+    
+    .live-camera img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 10px;
+    }
+    
+    .camera-overlay-live {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+    
+    .live-indicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: white;
+        font-weight: bold;
+        font-size: 0.9rem;
+        background: rgba(231, 76, 60, 0.8);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+    }
+    
+    .live-dot {
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        animation: pulse 1.5s infinite;
+    }
+    
+    .timestamp {
+        color: white;
+        font-size: 0.9rem;
+        background: rgba(0,0,0,0.6);
+        padding: 0.3rem 0.8rem;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+    }
+    
+    .control-panel {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .control-panel h4 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .control-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+    
+    .control-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 2px solid #ecf0f1;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        color: #2c3e50;
+    }
+    
+    .control-btn:hover {
+        background: #3498db;
+        color: white;
+        border-color: #3498db;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .control-btn i {
+        font-size: 1.5rem;
+    }
+    
+    .activity-log {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .activity-log h4 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .log-entries {
+        max-height: 200px;
+        overflow-y: auto;
+        border: 1px solid #ecf0f1;
+        border-radius: 8px;
+        padding: 1rem;
+        background: #fafbfc;
+    }
+    
+    .log-entry {
+        display: flex;
+        gap: 1rem;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #f1f3f4;
+        font-size: 0.9rem;
+    }
+    
+    .log-entry:last-child {
+        border-bottom: none;
+    }
+    
+    .log-time {
+        color: #7f8c8d;
+        font-family: 'Courier New', monospace;
+        min-width: 80px;
+    }
+    
+    .log-text {
+        color: #2c3e50;
+    }
+    
+    /* Mobile Responsive for Guardian Room Modal */
+    @media (max-width: 768px) {
+        .guardian-room-modal {
+            width: 98%;
+            max-height: 98vh;
+            margin: 1vh auto;
+        }
+        
+        .room-info-panel {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .control-buttons {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .room-monitoring-container {
+            padding: 1rem;
+            gap: 1rem;
+        }
+        
+        .guardian-room-modal .modal-header {
+            padding: 1rem;
+        }
+        
+        .guardian-room-modal .modal-footer {
+            padding: 1rem;
+            flex-direction: column;
+        }
+        
+        .guardian-room-modal .modal-footer button {
+            width: 100%;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .control-buttons {
+            grid-template-columns: 1fr;
+        }
+        
+        .status-indicators {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .room-monitoring-container {
+            padding: 0.5rem;
+        }
+    }
+    
+    .guardian-form .form-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+    }
+}
+
+/* Large Screen Optimization */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .hero-content h1 {
+        font-size: 4rem;
+    }
+    
+    .section h2 {
+        font-size: 3rem;
+    }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .nav-link,
+    .emergency-btn,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .emergency-btn.floating {
+        padding: 1.4rem 2.2rem;
+        font-size: 1.2rem;
+    }
+    
+    .dropdown-menu a {
+        padding: 1rem 1.5rem;
+    }
+    
+    .package-features li {
+        padding: 1rem 0;
     }
 }

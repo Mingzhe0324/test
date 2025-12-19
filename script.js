@@ -88,6 +88,8 @@ const availableProgrammes = {
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initializeApp();
+    initializeMobileMenu();
+    initializeTouchInteractions();
 });
 
 function initializeApp() {
@@ -117,6 +119,52 @@ function initializeApp() {
     
     // Load user schedule
     loadUserSchedule();
+    
+    // Initialize touch interactions for mobile
+    initializeTouchInteractions();
+}
+
+// Touch Interactions for Mobile
+function initializeTouchInteractions() {
+    // Add touch feedback to buttons
+    const buttons = document.querySelectorAll('.btn, .emergency-btn, .control-btn, .nav-link');
+    buttons.forEach(button => {
+        button.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
+        }, { passive: true });
+        
+        button.addEventListener('touchend', function() {
+            this.style.transform = '';
+        }, { passive: true });
+    });
+    
+    // Improve scrolling on mobile
+    if ('ontouchstart' in window) {
+        document.body.style.touchAction = 'manipulation';
+        
+        // Add smooth scrolling for mobile
+        const scrollableElements = document.querySelectorAll('.modal-body, .activity-log');
+        scrollableElements.forEach(element => {
+            element.style.webkitOverflowScrolling = 'touch';
+        });
+    }
+    
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+        setTimeout(() => {
+            // Adjust modal positions after orientation change
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'block') {
+                    // Recenter modal
+                    const modalContent = modal.querySelector('.modal-content');
+                    if (modalContent) {
+                        modalContent.style.marginTop = '5vh';
+                    }
+                }
+            });
+        }, 100);
+    });
 }
 
 // Health Monitoring Functions
@@ -202,6 +250,7 @@ function initializeEmergencyButton() {
     const emergencyBtn = document.getElementById('emergencyBtn');
     const confirmBtn = document.getElementById('confirmEmergency');
     const cancelBtn = document.getElementById('cancelEmergency');
+    const copyAddressBtn = document.getElementById('copyAddressBtn');
     
     if (emergencyBtn) {
         emergencyBtn.addEventListener('click', showEmergencyModal);
@@ -213,6 +262,10 @@ function initializeEmergencyButton() {
     
     if (cancelBtn) {
         cancelBtn.addEventListener('click', cancelEmergency);
+    }
+    
+    if (copyAddressBtn) {
+        copyAddressBtn.addEventListener('click', copyEmergencyAddress);
     }
 }
 
@@ -255,6 +308,7 @@ function confirmEmergency() {
 function cancelEmergency() {
     clearInterval(emergencyTimer);
     closeModal('emergencyModal');
+    showSuccessMessage('Emergency alert has been cancelled.');
 }
 
 function playEmergencySound() {
@@ -274,6 +328,146 @@ function playEmergencySound() {
     
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.5);
+}
+
+// Copy Emergency Address Function
+function copyEmergencyAddress() {
+    const emergencyAddress = `🚨 EMERGENCY LOCATION 🚨\n\nSerene Retirement Village\n123, Jalan Serene\n50250 Kuala Lumpur\nMalaysia\n\n📞 Emergency: +603-1234-9999\n📞 Main Line: +603-1234-5678\n\n📍 GPS Coordinates: 3.1390° N, 101.6891° E\n\n⏰ Time: ${new Date().toLocaleString()}`;
+    
+    // Use modern Clipboard API if available
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(emergencyAddress).then(() => {
+            showSuccessMessage('Emergency address and contact information copied to clipboard! You can share it with emergency services.');
+        }).catch(() => {
+            // Fallback method
+            fallbackCopyTextToClipboard(emergencyAddress);
+        });
+    } else {
+        // Fallback for older browsers
+        fallbackCopyTextToClipboard(emergencyAddress);
+    }
+}
+
+// Call Emergency Services Function
+function callEmergencyServices() {
+    // Show confirmation modal
+    const modal = document.getElementById('successModal');
+    const messageElement = document.getElementById('successMessage');
+    
+    const callMessage = `
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; color: #e74c3c; margin-bottom: 1rem;">
+                <i class="fas fa-phone-alt"></i>
+            </div>
+            <h3 style="color: #e74c3c; margin-bottom: 1rem;">Call Emergency Services</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">You are about to call the emergency services (999).</p>
+            
+            <div style="background: #fdf2f2; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                <p style="margin: 0; color: #2c3e50; font-weight: bold;">Emergency Information Ready:</p>
+                <p style="margin: 0.5rem 0; color: #7f8c8d;">Serene Retirement Village</p>
+                <p style="margin: 0; color: #7f8c8d;">123, Jalan Serene, 50250 Kuala Lumpur</p>
+            </div>
+            
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button onclick="makeEmergencyCall()" class="btn btn-danger" style="padding: 0.8rem 1.5rem;">
+                    <i class="fas fa-phone"></i> Call 999
+                </button>
+                <button onclick="closeModal('successModal')" class="btn btn-secondary" style="padding: 0.8rem 1.5rem;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    `;
+    
+    messageElement.innerHTML = callMessage;
+    modal.style.display = 'block';
+}
+
+function makeEmergencyCall() {
+    // Close the modal
+    closeModal('successModal');
+    
+    // Attempt to make the call
+    window.location.href = 'tel:999';
+    
+    // Show confirmation
+    setTimeout(() => {
+        showSuccessMessage('Connecting to emergency services (999)... Please stay on the line.');
+    }, 500);
+}
+
+function notifyFamily() {
+    const modal = document.getElementById('successModal');
+    const messageElement = document.getElementById('successMessage');
+    
+    // 1. Force the modal to appear instantly by adding the .instant class
+    modal.classList.add('instant');
+    
+    const familyMessage = `
+        <div style="text-align: center;">
+            <div style="font-size: 2.5rem; color: #3498db; margin-bottom: 15px;">
+                <i class="fas fa-users"></i>
+            </div>
+            <h3 style="margin-bottom: 10px;">Notify Family Members</h3>
+            <p style="margin-bottom: 20px; color: #666;">Select contacts to alert immediately:</p>
+            
+            <div style="text-align: left; margin-bottom: 20px;">
+                <div class="contact-check-item">
+                    <input type="checkbox" id="fam1" checked style="width: 20px; height: 20px;">
+                    <label for="fam1">👨‍⚕️ Dr. Ahmad (Son) - +6012-345-6789</label>
+                </div>
+                <div class="contact-check-item">
+                    <input type="checkbox" id="fam2" checked style="width: 20px; height: 20px;">
+                    <label for="fam2">👩‍⚕️ Sarah (Daughter) - +6012-987-6543</label>
+                </div>
+                <div class="contact-check-item">
+                    <input type="checkbox" id="fam3" style="width: 20px; height: 20px;">
+                    <label for="fam3">👨‍⚕️ Mr. Tan (Guardian) - +6017-555-1234</label>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 10px;">
+                <button onclick="sendFamilyNotifications()" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i> Send Now
+                </button>
+                <button onclick="closeInstantModal()" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    `;
+    
+    messageElement.innerHTML = familyMessage;
+    modal.style.display = 'flex';
+}
+
+function closeInstantModal() {
+    const modal = document.getElementById('successModal');
+    modal.style.display = 'none';
+    modal.classList.remove('instant'); // Clean up for next time
+}
+
+function sendFamilyNotifications() {
+    // Immediate feedback without delay
+    const messageElement = document.getElementById('successMessage');
+    messageElement.innerHTML = `
+        <div style="text-align: center; padding: 20px;">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: #27ae60;"></i>
+            <h3 style="margin-top: 15px; color: #27ae60;">Alerts Dispatched!</h3>
+            <p>Confirmation SMS sent to selected family members.</p>
+            <button onclick="closeInstantModal()" class="btn btn-primary" style="margin-top: 20px;">Back to Home</button>
+        </div>
+    `;
+}
+ 
+
+function sendFamilyNotifications() {
+    // Close the modal
+    closeModal('successModal');
+    
+    // Simulate sending notifications
+    showSuccessMessage('Emergency notifications have been sent to your family members. They will be updated on the situation.');
+    
+    // In a real application, this would send actual notifications via SMS, email, or app notifications
+    console.log('Family emergency notifications sent');
 }
 
 // Payment System Functions
@@ -767,8 +961,89 @@ function scrollToSection(sectionId) {
 }
 
 function initializeMobileMenu() {
-    // This would be implemented if a mobile menu is needed
-    // For now, the navigation is responsive through CSS
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    // Toggle mobile menu
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            toggleMobileMenu();
+        });
+    }
+    
+    // Close mobile menu when clicking overlay
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Close mobile menu when clicking nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            closeMobileMenu();
+        });
+    });
+    
+    // Handle dropdown toggles in mobile
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                e.preventDefault();
+                const dropdown = this.parentElement;
+                dropdown.classList.toggle('active');
+            }
+        });
+    });
+    
+    // Close mobile menu on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mainNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
+}
+
+function toggleMobileMenu() {
+    const mainNav = document.getElementById('mainNav');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    
+    mainNav.classList.toggle('active');
+    mobileMenuOverlay.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (mainNav.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+}
+
+function closeMobileMenu() {
+    const mainNav = document.getElementById('mainNav');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    mainNav.classList.remove('active');
+    mobileMenuOverlay.classList.remove('active');
+    mobileMenuToggle.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Close all dropdowns
+    dropdowns.forEach(dropdown => {
+        dropdown.classList.remove('active');
+    });
 }
 
 function showSuccessMessage(message) {
@@ -1698,3 +1973,222 @@ function fallbackCopyTextToClipboard(text) {
     
     document.body.removeChild(textArea);
 }
+
+// Guardian Room Access Function
+function handleGuardianAccess(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(event.target);
+    const accessData = {
+        roomNumber: formData.get('roomNumber'),
+        accessCode: formData.get('accessCode'),
+        guardianName: formData.get('guardianName'),
+        relationship: formData.get('relationship')
+    };
+    
+    // Validate access code (6 digits)
+    if (accessData.accessCode.length !== 6 || !/^\d{6}$/.test(accessData.accessCode)) {
+        showGuardianAccessError('Please enter a valid 6-digit access code.');
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = event.target.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Accessing...';
+    submitBtn.disabled = true;
+    
+    // Simulate authentication process
+    setTimeout(() => {
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Simulate successful access (in real app, this would verify with backend)
+        if (accessData.accessCode === '123456') {
+            showGuardianAccessSuccess(accessData);
+        } else {
+            showGuardianAccessError('Invalid access code. Please check and try again.');
+        }
+        
+        // Log access attempt (in real app, this would be sent to server)
+        console.log('Guardian access attempt:', accessData);
+    }, 2000);
+}
+
+function showGuardianAccessSuccess(accessData) {
+    // Close the success modal and open the dedicated guardian room monitoring modal
+    closeModal('successModal');
+    openGuardianRoomMonitoring(accessData);
+}
+
+function openGuardianRoomMonitoring(accessData) {
+    const modal = document.getElementById('guardianRoomModal');
+    
+    // Update modal with guardian information
+    document.getElementById('monitoringRoomNumber').textContent = accessData.roomNumber;
+    document.getElementById('guardianNameDisplay').textContent = accessData.guardianName;
+    document.getElementById('relationshipDisplay').textContent = accessData.relationship.charAt(0).toUpperCase() + accessData.relationship.slice(1);
+    document.getElementById('sessionStartTime').textContent = new Date().toLocaleString();
+    
+    // Start live timestamp
+    startLiveTimestamp();
+    
+    // Add initial activity log entries
+    addActivityLogEntry('Session started - Guardian connected');
+    addActivityLogEntry(`Room ${accessData.roomNumber} camera activated`);
+    addActivityLogEntry('Recording started');
+    
+    // Show the modal
+    modal.style.display = 'block';
+    
+    // Log successful access
+    console.log('Guardian room monitoring started:', accessData);
+}
+
+function startLiveTimestamp() {
+    const timestampElement = document.getElementById('liveTimestamp');
+    if (!timestampElement) return;
+    
+    let seconds = 0;
+    
+    // Update timestamp every second
+    const interval = setInterval(() => {
+        seconds++;
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        
+        const formattedTime =
+            String(hours).padStart(2, '0') + ':' +
+            String(minutes).padStart(2, '0') + ':' +
+            String(secs).padStart(2, '0');
+        
+        timestampElement.textContent = formattedTime;
+        
+        // Clear interval when modal is closed
+        if (document.getElementById('guardianRoomModal').style.display === 'none') {
+            clearInterval(interval);
+        }
+    }, 1000);
+}
+
+function addActivityLogEntry(message) {
+    const logEntries = document.getElementById('activityLogEntries');
+    if (!logEntries) return;
+    
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+    
+    const logEntry = document.createElement('div');
+    logEntry.className = 'log-entry';
+    logEntry.innerHTML = `
+        <span class="log-time">${timeString}</span>
+        <span class="log-text">${message}</span>
+    `;
+    
+    // Add to the top of the log
+    logEntries.insertBefore(logEntry, logEntries.firstChild);
+    
+    // Keep only the last 10 entries
+    while (logEntries.children.length > 10) {
+        logEntries.removeChild(logEntries.lastChild);
+    }
+}
+
+function toggleAudio() {
+    const audioToggle = document.getElementById('audioToggle');
+    const icon = audioToggle.querySelector('i');
+    const text = audioToggle.querySelector('span');
+    
+    if (icon.classList.contains('fa-microphone')) {
+        icon.className = 'fas fa-microphone-slash';
+        text.textContent = 'Unmute';
+        addActivityLogEntry('Audio muted');
+    } else {
+        icon.className = 'fas fa-microphone';
+        text.textContent = 'Mute';
+        addActivityLogEntry('Audio unmuted');
+    }
+}
+
+function toggleRecording() {
+    const recordingToggle = document.getElementById('recordingToggle');
+    const icon = recordingToggle.querySelector('i');
+    const text = recordingToggle.querySelector('span');
+    
+    if (icon.classList.contains('fa-record-vinyl')) {
+        icon.className = 'fas fa-stop';
+        text.textContent = 'Start Recording';
+        addActivityLogEntry('Recording stopped');
+    } else {
+        icon.className = 'fas fa-record-vinyl';
+        text.textContent = 'Stop Recording';
+        addActivityLogEntry('Recording started');
+    }
+}
+
+function takeSnapshot() {
+    addActivityLogEntry('Snapshot captured');
+    showSuccessMessage('Snapshot captured successfully!');
+}
+
+function endMonitoringSession() {
+    addActivityLogEntry('Session ended by guardian');
+    closeModal('guardianRoomModal');
+    showSuccessMessage('Monitoring session ended successfully. Thank you for using our guardian monitoring system.');
+}
+
+function showGuardianAccessError(errorMessage) {
+    const modal = document.getElementById('successModal');
+    const messageElement = document.getElementById('successMessage');
+    
+    const errorContent = `
+        <div style="text-align: center; padding: 1rem;">
+            <div style="font-size: 3rem; color: #e74c3c; margin-bottom: 1rem;">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 style="color: #e74c3c; margin-bottom: 1rem;">Access Denied</h3>
+            <p style="color: #7f8c8d; margin-bottom: 1.5rem;">${errorMessage}</p>
+            
+            <div style="background: #fdf2f2; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; text-align: left;">
+                <h4 style="color: #2c3e50; margin-bottom: 1rem;">Troubleshooting:</h4>
+                <ul style="color: #7f8c8d; line-height: 1.6; padding-left: 1.5rem;">
+                    <li>Ensure you have the correct 6-digit access code</li>
+                    <li>Check that the room number is correct</li>
+                    <li>Contact the reception if you continue to have issues</li>
+                    <li>Access codes are case-sensitive and expire after 24 hours</li>
+                </ul>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                <p style="margin: 0; color: #7f8c8d; font-size: 0.9rem;">
+                    <strong>Need help?</strong> Call our reception: <a href="tel:+603-1234-5678" style="color: #3498db;">+603-1234-5678</a>
+                </p>
+            </div>
+            
+            <button onclick="closeModal('successModal')" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">
+                <i class="fas fa-redo"></i> Try Again
+            </button>
+        </div>
+    `;
+    
+    messageElement.innerHTML = errorContent;
+    modal.style.display = 'block';
+}
+
+function toggleFullscreen() {
+    // In a real application, this would toggle fullscreen mode for the video feed
+    showSuccessMessage('Fullscreen mode activated. Press ESC to exit.');
+}
+
+// Add guardian access function to global scope
+window.handleGuardianAccess = handleGuardianAccess;
+window.toggleFullscreen = toggleFullscreen;
+
+// Add emergency functions to global scope
+window.callEmergencyServices = callEmergencyServices;
+window.makeEmergencyCall = makeEmergencyCall;
+window.notifyFamily = notifyFamily;
+window.sendFamilyNotifications = sendFamilyNotifications;
+window.copyEmergencyAddress = copyEmergencyAddress;

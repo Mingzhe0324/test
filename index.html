@@ -8,6 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -16,7 +19,10 @@
                     <i class="fas fa-home"></i>
                     <span>Serene Retirement Village</span>
                 </div>
-                <nav class="nav">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav" id="mainNav">
                     <ul>
                         <li><a href="#home" class="nav-link">Home</a></li>
                         <li><a href="#about" class="nav-link">About</a></li>
@@ -37,10 +43,6 @@
                         <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
                 </nav>
-                <button class="emergency-btn" id="emergencyBtn">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    EMERGENCY
-                </button>
             </div>
         </div>
     </header>
@@ -94,28 +96,34 @@
                     <h3>Meet Our Leadership Team</h3>
                     <div class="team-grid">
                         <div class="team-member">
-                            <img src="https://asset.kompas.com/crops/I6UkG7cuinm_mQjOq8b7Jp76ejM=/0x0:1000x667/1200x800/data/photo/2020/01/07/5e143342aed9a.jpg" alt="Dr. Ahmad Hassan">
-                            <h4>Dr. Ahmad Hassan</h4>
-                            <p>Chief Executive Officer</p>
-                            <p>With over 20 years in healthcare management, Dr. Hassan leads our team with passion and expertise in geriatric care.</p>
+                            <img src="c:\Users\User\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\sessions\5836883CC14B32BC63240DE8AC219B4C431BE079\transfers\2025-51\WhatsApp Image 2025-12-19 at 8.26.52 AM.jpeg" alt="Ms. Chai Xin Tong">
+                            <h4>Ms. Chai Xin Tong</h4>
+                            <p>Project Lead</p>
+                            <p>Oversees the development and implementation of our retirement village project, ensuring quality and excellence.</p>
                         </div>
                         <div class="team-member">
-                            <img src="https://www.precisionmedicallabs.com/wp-content/uploads/2023/07/hero-1024x901.jpg" alt="Dr. Sarah Lim">
-                            <h4>Dr. Sarah Lim</h4>
-                            <p>Medical Director</p>
-                            <p>Board-certified geriatrician dedicated to providing comprehensive medical care for our residents.</p>
+                            <img src="c:\Users\User\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\sessions\5836883CC14B32BC63240DE8AC219B4C431BE079\transfers\2025-51\WhatsApp Image 2025-12-19 at 8.29.44 AM.jpeg" alt="Ms. Tan Ker Li">
+                            <h4>Ms. Tan Ker Li</h4>
+                            <p>Community Development Manager</p>
+                            <p>Responsible for building a vibrant community through resident engagement and social activities.</p>
                         </div>
                         <div class="team-member">
-                            <img src="https://img.freepik.com/premium-photo/bright-modern-office-35-years-old-handsome-chinese-businessman_148840-5366.jpg" alt="Mr. Tan Chee Siong">
-                            <h4>Mr. Tan Chee Siong</h4>
-                            <p>Operations Director</p>
-                            <p>Ensuring smooth daily operations and maintaining our high standards of service excellence.</p>
+                            <img src="c:\Users\User\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\sessions\5836883CC14B32BC63240DE8AC219B4C431BE079\transfers\2025-51\WhatsApp Image 2025-12-19 at 8.29.51 AM.jpeg" alt="Ms. Nicole Cheng">
+                            <h4>Ms. Nicole Cheng</h4>
+                            <p>Marketing and Partnership Lead</p>
+                            <p>Drives marketing strategies and builds partnerships to promote our retirement village and its services.</p>
                         </div>
                         <div class="team-member">
-                            <img src="https://img.freepik.com/premium-photo/malay-female-employee-sitting-her-workplace-office_856987-1126.jpg" alt="Ms. Aisha Binti">
-                            <h4>Ms. Aisha Binti</h4>
-                            <p>Care Services Director</p>
-                            <p>Leading our compassionate care team with over 15 years of experience in elderly care.</p>
+                            <img src="c:\Users\User\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\LocalState\sessions\5836883CC14B32BC63240DE8AC219B4C431BE079\transfers\2025-51\WhatsApp Image 2025-12-19 at 8.33.49 AM.jpeg" alt="Ms. Pua Yee Lam">
+                            <h4>Ms. Pua Yee Lam</h4>
+                            <p>Operational Manager</p>
+                            <p>Ensures smooth daily operations and high-quality service delivery across all departments.</p>
+                        </div>
+                         <div class="team-member">
+                            <img src="C:\Users\User\Downloads\2025-09-06 160415.png" alt="Mr. Chong Ming Zhe">
+                            <h4>Mr. Chong Ming Zhe</h4>
+                            <p>Technology Lead</p>
+                            <p>Leads the integration of technology solutions to enhance resident care and facility management.</p>
                         </div>
                     </div>
                 </div>
@@ -282,7 +290,7 @@
                     <div class="package-card luxury">
                         <div class="package-header">
                             <h3>Luxury Care</h3>
-                            <div class="package-price">RM 7,000<span>/month</span></div>
+                            <div class="package-price">RM 6,500<span>/month</span></div>
                         </div>
                         <ul class="package-features">
                             <li><i class="fas fa-check"></i> Luxury suite with balcony</li>
@@ -416,7 +424,7 @@
                                 <h3>Singapore Cultural Tour</h3>
                                 <p class="programme-schedule">Monthly - 3 Days 2 Nights</p>
                                 <p>Explore the vibrant culture and attractions of Singapore with guided tours and comfortable accommodation.</p>
-                                <p class="programme-price"><strong>Price:</strong> RM 1,500 per person</p>
+                                <p class="programme-price"><strong>Price:</strong> RM 2,000 per person</p>
                                 <button class="btn btn-small btn-premium" onclick="joinProgramme('Singapore Cultural Tour')">Book Now</button>
                             </div>
                         </div>
@@ -429,7 +437,7 @@
                                 <h3>Thailand Wellness Retreat</h3>
                                 <p class="programme-schedule">Quarterly - 5 Days 4 Nights</p>
                                 <p>Rejuvenate your body and soul with traditional Thai massage, meditation, and spa treatments.</p>
-                                <p class="programme-price"><strong>Price:</strong> RM 2,800 per person</p>
+                                <p class="programme-price"><strong>Price:</strong> RM 3,300 per person</p>
                                 <button class="btn btn-small btn-premium" onclick="joinProgramme('Thailand Wellness Retreat')">Book Now</button>
                             </div>
                         </div>
@@ -442,7 +450,7 @@
                                 <h3>Bali Spiritual Journey</h3>
                                 <p class="programme-schedule">Bi-annually - 4 Days 3 Nights</p>
                                 <p>Experience the spiritual and natural beauty of Bali with temple visits and cultural performances.</p>
-                                <p class="programme-price"><strong>Price:</strong> RM 2,200 per person</p>
+                                <p class="programme-price"><strong>Price:</strong> RM 2,700 per person</p>
                                 <button class="btn btn-small btn-premium" onclick="joinProgramme('Bali Spiritual Journey')">Book Now</button>
                             </div>
                         </div>
@@ -654,6 +662,44 @@
                                 <span class="camera-status live">LIVE</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Guardian Room Access -->
+                <div class="guardian-access">
+                    <h3>Guardian Room Monitoring</h3>
+                    <p>Family members can monitor their elderly parents' rooms securely.</p>
+                    <div class="guardian-form">
+                        <form id="guardianAccessForm" onsubmit="handleGuardianAccess(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="roomNumber">Room Number *</label>
+                                    <input type="text" id="roomNumber" name="roomNumber" placeholder="e.g., A-101" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accessCode">Access Code *</label>
+                                    <input type="password" id="accessCode" name="accessCode" placeholder="Enter 6-digit code" maxlength="6" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="guardianName">Guardian Name *</label>
+                                <input type="text" id="guardianName" name="guardianName" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="relationship">Relationship *</label>
+                                <select id="relationship" name="relationship" required>
+                                    <option value="">Select relationship</option>
+                                    <option value="son">Son</option>
+                                    <option value="daughter">Daughter</option>
+                                    <option value="spouse">Spouse</option>
+                                    <option value="grandchild">Grandchild</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-video"></i> Access Room Camera
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1031,7 +1077,7 @@
                         <button class="btn btn-primary" onclick="getDirections()">
                             <i class="fas fa-directions"></i> Get Directions
                         </button>
-                        <button class="btn btn-secondary" onclick="copyAddress()">
+                        <button class="btn btn-primary" onclick="copyAddress()">
                             <i class="fas fa-copy"></i> Copy Address
                         </button>
                     </div>
@@ -1080,19 +1126,97 @@
             <div class="modal-header">
                 <h2><i class="fas fa-exclamation-triangle"></i> EMERGENCY ALERT</h2>
             </div>
-            <div class="modal-body">
-                <p>Emergency assistance has been requested!</p>
-                <p>Our medical team and staff have been notified and will respond immediately.</p>
-                <div class="emergency-timer">
-                    <div class="timer-circle">
-                        <span id="countdown">30</span>
+            <div class="modal-body emergency-modal-body">
+                <div class="emergency-content-wrapper">
+                    <!-- Emergency Alert Section -->
+                    <div class="emergency-alert-section">
+                        <div class="emergency-icon-large">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3>EMERGENCY ASSISTANCE REQUESTED</h3>
+                        <p class="emergency-main-message">Our medical team and staff have been notified and will respond immediately.</p>
                     </div>
-                    <p>Canceling in <span id="timerText">30</span> seconds...</p>
+
+                    <!-- Emergency Information Section -->
+                    <div class="emergency-info-section">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <i class="fas fa-ambulance"></i>
+                                <div>
+                                    <h4>Medical Team</h4>
+                                    <p>Notified and on the way</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-hospital"></i>
+                                <div>
+                                    <h4>Nearest Hospital</h4>
+                                    <p>KL General Hospital (5 mins)</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div>
+                                    <h4>Emergency Contact</h4>
+                                    <p>+603-1234-9999</p>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Location</h4>
+                                    <p>123, Jalan Serene, KL</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Countdown Timer Section -->
+                    <div class="emergency-timer-section">
+                        <div class="timer-circle">
+                            <span id="countdown">30</span>
+                        </div>
+                        <p class="timer-text">Emergency will be confirmed in <span id="timerText">30</span> seconds...</p>
+                        <p class="timer-subtext">Press "CANCEL EMERGENCY" to abort</p>
+                    </div>
+                    
+                    <!-- Quick Actions Section -->
+                    <div class="emergency-actions-section">
+                        <h4>Quick Actions</h4>
+                        <div class="actions-grid">
+                            <button class="btn btn-info action-btn" id="copyAddressBtn">
+                                <i class="fas fa-copy"></i>
+                                <span>Copy Address for Emergency Services</span>
+                            </button>
+                            <button class="btn btn-warning action-btn" onclick="callEmergencyServices()">
+                                <i class="fas fa-phone"></i>
+                                <span>Call Emergency Services (999)</span>
+                            </button>
+                            <button class="btn btn-notify action-btn" onclick="notifyFamily()">
+                                <i class="fas fa-users"></i>
+                                <span>Notify Family Members</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Important Instructions -->
+                    <div class="emergency-instructions">
+                        <h4><i class="fas fa-info-circle"></i> Important Instructions</h4>
+                        <ul>
+                            <li>Stay calm and remain in your current location</li>
+                            <li>Our medical team will arrive within 2-3 minutes</li>
+                            <li>Keep your phone accessible for incoming calls</li>
+                            <li>If you are with someone, stay with them until help arrives</li>
+                            <li>Have your medical information ready if possible</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-danger" id="confirmEmergency">Confirm Emergency</button>
-                <button class="btn btn-secondary" id="cancelEmergency">Cancel</button>
+                <button class="btn btn-cancel-emergency" id="cancelEmergency">
+                    <i class="fas fa-times-circle"></i> CANCEL EMERGENCY
+                </button>
             </div>
         </div>
     </div>
@@ -1196,6 +1320,117 @@
                 <button class="btn btn-primary" onclick="printSchedule()">Print Schedule</button>
             </div>
         </div>
+    </div>
+
+    <!-- Guardian Room Monitoring Modal -->
+    <div id="guardianRoomModal" class="modal">
+        <div class="modal-content guardian-room-modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-video"></i> Guardian Room Monitoring</h2>
+                <button class="close-btn" onclick="closeModal('guardianRoomModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="room-monitoring-container">
+                    <!-- Room Info -->
+                    <div class="room-info-panel">
+                        <div class="room-details">
+                            <h3>Room <span id="monitoringRoomNumber">A-101</span></h3>
+                            <div class="status-indicators">
+                                <div class="status-item online">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Camera Online</span>
+                                </div>
+                                <div class="status-item recording">
+                                    <i class="fas fa-record-vinyl"></i>
+                                    <span>Recording</span>
+                                </div>
+                                <div class="status-item audio">
+                                    <i class="fas fa-microphone"></i>
+                                    <span>Audio Enabled</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="guardian-info">
+                            <p><strong>Guardian:</strong> <span id="guardianNameDisplay">-</span></p>
+                            <p><strong>Relationship:</strong> <span id="relationshipDisplay">-</span></p>
+                            <p><strong>Session Started:</strong> <span id="sessionStartTime">-</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Live Camera Feed -->
+                    <div class="camera-feed-container">
+                        <div class="live-camera">
+                            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Room Camera Feed" id="roomCameraFeed">
+                            <div class="camera-overlay-live">
+                                <div class="live-indicator">
+                                    <span class="live-dot"></span>
+                                    LIVE
+                                </div>
+                                <div class="timestamp" id="liveTimestamp">00:00:00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Control Panel -->
+                    <div class="control-panel">
+                        <h4>Camera Controls</h4>
+                        <div class="control-buttons">
+                            <button class="control-btn" onclick="toggleAudio()" id="audioToggle">
+                                <i class="fas fa-microphone"></i>
+                                <span>Mute</span>
+                            </button>
+                            <button class="control-btn" onclick="toggleRecording()" id="recordingToggle">
+                                <i class="fas fa-record-vinyl"></i>
+                                <span>Stop Recording</span>
+                            </button>
+                            <button class="control-btn" onclick="takeSnapshot()">
+                                <i class="fas fa-camera"></i>
+                                <span>Snapshot</span>
+                            </button>
+                            <button class="control-btn" onclick="toggleFullscreen()">
+                                <i class="fas fa-expand"></i>
+                                <span>Fullscreen</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity Log -->
+                    <div class="activity-log">
+                        <h4>Recent Activity</h4>
+                        <div class="log-entries" id="activityLogEntries">
+                            <div class="log-entry">
+                                <span class="log-time">14:30:25</span>
+                                <span class="log-text">Session started - Guardian connected</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="log-time">14:30:26</span>
+                                <span class="log-text">Camera feed activated</span>
+                            </div>
+                            <div class="log-entry">
+                                <span class="log-time">14:30:27</span>
+                                <span class="log-text">Recording started</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" onclick="endMonitoringSession()">
+                    <i class="fas fa-stop"></i> End Session
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal('guardianRoomModal')">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Emergency Button -->
+    <div class="floating-emergency-container">
+        <button class="emergency-btn floating" id="emergencyBtn">
+            <i class="fas fa-exclamation-triangle"></i>
+            EMERGENCY
+        </button>
     </div>
 
     <script src="script.js"></script>
