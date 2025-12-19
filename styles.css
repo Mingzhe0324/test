@@ -1728,7 +1728,7 @@ body {
 
 .modal-content {
     background-color: white;
-    margin: 10% auto;
+    margin: 5% auto;
     padding: 0;
     border-radius: 15px;
     width: 90%;
@@ -3479,7 +3479,7 @@ button:focus {
     /* Floating Emergency Button Mobile */
     .floating-emergency-container {
         bottom: 20px;
-        left: 20px;
+        right: 20px;
     }
     
     .emergency-btn.floating {
@@ -3635,7 +3635,7 @@ button:focus {
     /* Ultra-small floating button */
     .floating-emergency-container {
         bottom: 15px;
-        left: 15px;
+        right: 15px;
     }
     
     .emergency-btn.floating {
